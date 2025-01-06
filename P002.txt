@@ -1,0 +1,4 @@
+No experimental data to back the claims
+No quantitative analysis like accuracy, error rates
+Theoretical claims, with no backing from actual data
+No comparison with existing studies

@@ -1,0 +1,3 @@
+The Paper doesn't compare the proposed method with other in use methods
+Limited Data, Very Few Test cases which leads to less confident claim
+low accuracy of the tests conducted
