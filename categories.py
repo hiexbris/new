@@ -3,10 +3,6 @@ from PyPDF2 import PdfReader
 import nltk
 import sys
 sys.stdout.reconfigure(encoding='utf-8') 
-import torch
-print(torch.cuda.is_available())  # Should return True
-print(torch.cuda.current_device())  # Should return the GPU ID (e.g., 0)
-print(torch.cuda.get_device_name(0)) 
 
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", device=0)
 
