@@ -61,5 +61,32 @@ for j in range(5):
         logits = outputs.logits
 
     prediction = torch.argmax(logits, dim=1)
-    print("Prediction:", "Valid" if prediction.item() == 1 else "Invalid")
+    print("Prediction:", "Valid" if prediction.item() == 1 else "Invalid") 
+    
+    if prediction.item() == 0:
+        from langchain.chains import LLMChain
+        from langchain.prompts import PromptTemplate
+        from langchain.llms import OpenAI
+
+        # Define the template for the explanation
+        prompt_template = """
+        Given the following content from a research paper, provide a short 10-word explanation of why it is not publishable.
+
+        Content: {paper_content}
+        Explanation:
+        """
+
+        # Create the prompt template and chain
+        prompt = PromptTemplate(input_variables=["paper_content"], template=prompt_template)
+        llm = OpenAI(temperature=0.5)
+
+        chain = LLMChain(prompt=prompt, llm=llm)
+
+        # Example content from the paper (this would typically come from your data extraction step)
+        paper_content = "The methodology in this paper uses an outdated technique that is not suitable for the problem being addressed."
+
+        # Generate explanation
+        explanation = chain.run({"paper_content": paper_content})
+        print(explanation)
+
 
