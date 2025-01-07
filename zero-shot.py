@@ -28,7 +28,7 @@ def classify_sections(text, classifier, categories, batch_size=1):
         classification = classifier(batch_text, candidate_labels=categories, multi_label=True)
         label = classification['labels'][0]  
         score = classification['scores'][0] 
-        if score > 0.4:
+        if score > 0.2:
             results[label].append((batch_text, score))          
     return results
 
