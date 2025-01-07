@@ -15,30 +15,28 @@ def extract_text_from_pdf(pdf_path):
         text += page.extract_text()
     return text
 
-def classify_sections(text, classifier, categories, batch_size=3):
+def classify_sections(text, classifier, categories, batch_size=1):
     nltk.download('punkt')
     lines = nltk.tokenize.sent_tokenize(text)
-    results = []
+    results = {category: [] for category in categories}
+    
 
     for i in range(0, len(lines), batch_size):
         batch = lines[i:i + batch_size]
-        batch_text = " ".join(batch)  # Combine 5 lines into one batch
+        batch_text = " ".join(batch) 
         
-        if len(batch_text.strip()) > 20:  # Avoid very short batches
-            classification = classifier(batch_text, candidate_labels=categories, multi_label=True)
-            label = classification['labels'][0]  # Top category
-            score = classification['scores'][0]  # Confidence score
-            results.append((batch_text, label, score))
+        classification = classifier(batch_text, candidate_labels=categories, multi_label=True)
+        label = classification['labels'][0]  
+        score = classification['scores'][0] 
+        results[label].append((batch_text, score))  
     return results
 
 pdf_path = "D:\\KDAG Hackathon\\KDAG-Hackathon\\P001.pdf"
 text = extract_text_from_pdf(pdf_path)
-classified_results = classify_sections(text, classifier, categories)
+classified_results = classify_sections(text, classifier, categories)\
 
-# for paragraph, label, score in classified_results:
-#     print(f"\nParagraph:\n{paragraph}\n\nPredicted Category: {label} (Confidence: {score:.2f})")
-
-for category, items in classified_results.items():
-    print(f"\n==== {category.upper()} ====\n")
-    for chunk, score in items:
-        print(f"{chunk} (Confidence: {score:.2f})")
+for category in categories:
+    if category in classified_results:
+        print(f"\n==== {category} ====\n")
+        for chunk, score in classified_results[category]:
+            print(f"{chunk} (Confidence: {score:.2f})")
