@@ -28,8 +28,8 @@ def classify_sections(text, classifier, categories, batch_size=1):
         classification = classifier(batch_text, candidate_labels=categories, multi_label=True)
         label = classification['labels'][0]  
         score = classification['scores'][0] 
-        if score > 
-        results[label].append((batch_text, score))  
+        if score > 0.4:
+            results[label].append((batch_text, score))          
     return results
 
 pdf_path = "D:\\KDAG Hackathon\\KDAG-Hackathon\\P001.pdf"
