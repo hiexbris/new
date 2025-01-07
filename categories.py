@@ -33,7 +33,7 @@ def classify_sections(text, classifier, categories, batch_size=1):
 
 pdf_path = "D:\\KDAG Hackathon\\KDAG-Hackathon\\P001.pdf"
 text = extract_text_from_pdf(pdf_path)
-classified_results = classify_sections(text, classifier, categories)\
+classified_results = classify_sections(text, classifier, categories)
 
 for category in categories:
     if category in classified_results:
