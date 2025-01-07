@@ -6,7 +6,7 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", device=0)
 
-categories = ["Abstract", "Methodology", "Results", "Conclusion", "References"]
+categories = ["Abstract", "Methodology", "Results and Findings", "Conclusion"]
 
 def extract_text_from_pdf(pdf_path):
     reader = PdfReader(pdf_path)
@@ -28,6 +28,7 @@ def classify_sections(text, classifier, categories, batch_size=1):
         classification = classifier(batch_text, candidate_labels=categories, multi_label=True)
         label = classification['labels'][0]  
         score = classification['scores'][0] 
+        if score > 
         results[label].append((batch_text, score))  
     return results
 
