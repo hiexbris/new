@@ -40,7 +40,12 @@ class Zero_shot():
         text = extract_text_from_pdf(pdf_path)
         classified_results = classify_sections(text, self.classifier, categories)
 
-        return classified_results
+        category_sentences = {category: "" for category in categories}
+        for category in categories:
+            if category in classified_results:
+                category_sentences[category] = " ".join(chunk for chunk, _ in classified_results[category])
+
+        return category_sentences
 
         for category in categories:
             if category in classified_results:
