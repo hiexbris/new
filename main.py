@@ -18,7 +18,6 @@ def get_sciBERT_embedding(text):
     inputs = tokenizer(text, return_tensors='pt', truncation=True, padding=True, max_length=512)
     with torch.no_grad():
         outputs = model(**inputs)
-    # Return the mean of token embeddings (pooled output)
     return outputs.last_hidden_state.mean(dim=1).squeeze()
 
 publishability_results = {}
