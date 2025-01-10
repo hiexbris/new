@@ -72,3 +72,4 @@ for i in range(1):
         paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\P0{i+1}.pdf")
         paper['label'] = 'Publishable'
         paper['reasons'] = {}
+
