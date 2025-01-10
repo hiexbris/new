@@ -8,6 +8,7 @@ class Zero_shot():
 
     def __init__(self):
         self.classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli", device=0)
+        nltk.download('punkt')
 
     def sections(self, pdf_path):
 
@@ -21,7 +22,6 @@ class Zero_shot():
             return text
 
         def classify_sections(text, classifier, categories, batch_size=1):
-            nltk.download('punkt')
             lines = nltk.tokenize.sent_tokenize(text)
             results = {category: [] for category in categories}
             
@@ -45,6 +45,7 @@ class Zero_shot():
             if category in classified_results:
                 category_sentences[category] = " ".join(chunk for chunk, _ in classified_results[category])
 
+        print('Done')
         return category_sentences
 
         for category in categories:
