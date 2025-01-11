@@ -30,10 +30,8 @@ def load_methodology_data(json_path):
     with open(json_path, 'r') as file:
         data = json.load(file)
     methodologies, labels = [], []
-    for paper in data:  
-        reason = paper['Reasons']
-        reason_text = ' '.join(value for value in reason.values() if isinstance(value, str))
-        test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']} + {reason_text}"
+    for paper in data:
+        test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
         methodologies.append(test)
         labels.append(1 if paper['label'] == 'Publishable' else 0)
     return methodologies, labels
@@ -66,7 +64,7 @@ def all():
     model.to(device)
 
     training_args = TrainingArguments(
-        output_dir='./methodology_model',
+        output_dir='./Model',
         eval_strategy='epoch',
         save_strategy='epoch',
         learning_rate=5e-5,
@@ -89,8 +87,8 @@ def all():
 
     trainer.train()
 
-    model.save_pretrained('./methodology_model')
-    tokenizer.save_pretrained('./methodology_model')
+    model.save_pretrained('./Model')
+    tokenizer.save_pretrained('./Model')
 
 if __name__ == '__main__':
     all()

@@ -3,8 +3,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 
 def predict_methodology(methodology_text):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = AutoModelForSequenceClassification.from_pretrained('./methodology_model').to(device)
-    tokenizer = AutoTokenizer.from_pretrained('./methodology_model')
+    model = AutoModelForSequenceClassification.from_pretrained('./Model').to(device)
+    tokenizer = AutoTokenizer.from_pretrained('./Model')
     
     tokenized = tokenizer(
         methodology_text,
@@ -33,7 +33,7 @@ def predict_methodology(methodology_text):
 
 import json
 
-with open("test_data.json", 'r') as file:
+with open("training_data.json", 'r') as file:
     data = json.load(file)
 for paper in data:
     test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"

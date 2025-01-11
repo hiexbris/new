@@ -4,7 +4,7 @@ classifier = Zero_shot()
 
 test_data = []
 
-for i in range(150):
+for i in range(135):
     if i < 9:
         paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\P00{i+1}.pdf")
         test_data.append(paper)
