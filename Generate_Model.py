@@ -47,8 +47,7 @@ def preprocess_data(tokenizer, texts, labels, max_length=512):
     return dataset
 
 
-if __name__ == "__main__":
-    
+def all():
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
     json_path = 'training_data.json' 
@@ -93,4 +92,6 @@ if __name__ == "__main__":
     model.save_pretrained('./methodology_model')
     tokenizer.save_pretrained('./methodology_model')
 
+if __name__ == '__main__':
+    all()
     
