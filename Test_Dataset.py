@@ -6,15 +6,15 @@ test_data = []
 
 for i in range(135):
     if i < 9:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\P00{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Test\\P00{i+1}.pdf")
         test_data.append(paper)
         print(f"{i+1}.Done")
     elif i < 99:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\P0{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Test\\P0{i+1}.pdf")
         test_data.append(paper)
         print(f"{i+1}.Done")
     else:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\P{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Test\\P{i+1}.pdf")
         test_data.append(paper)
         print(f"{i+1}.Done")
 

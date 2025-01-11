@@ -6,7 +6,7 @@ training_data = []
 
 for i in range(15):
     if i < 5:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\R00{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
         if i == 0:
             paper['label'] = "Non-Publishable"
             training_data.append(paper)
@@ -28,12 +28,12 @@ for i in range(15):
             training_data.append(paper)
             print(f"{i+1}.Done")
     elif i < 9:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\R00{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
         paper['label'] = 'Publishable'
         training_data.append(paper)
         print(f"{i+1}.Done")
     else:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\R0{i+1}.pdf")
+        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R0{i+1}.pdf")
         paper['label'] = 'Publishable'
         training_data.append(paper)
         print(f"{i+1}.Done")
