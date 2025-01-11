@@ -1,4 +1,0 @@
-lack of evidence and credible justification
-no experiments or data or tests, no results
-does not describe how the method is implemented, tested, or evaluated
-the paper jumps between topics making it completely inappropriate, and lack focus

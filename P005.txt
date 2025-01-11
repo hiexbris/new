@@ -1,6 +1,0 @@
-Uses Existing Techniques
-less real world scenario
-Less test cases, datasets
-No comparison with existing methods
-No statistical analysis
-lack of clear explanation, repetitive text
