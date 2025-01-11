@@ -45,7 +45,7 @@ class Zero_shot():
             if category in classified_results:
                 category_sentences[category] = " ".join(chunk for chunk, _ in classified_results[category])
 
-        print('Done')
+        # print('Done')
         return category_sentences
 
         for category in categories:
