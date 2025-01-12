@@ -33,7 +33,7 @@ def predict_methodology(methodology_text):
 
 import json
 
-with open("training_data.json", 'r') as file:
+with open("test_data.json", 'r') as file:
     data = json.load(file)
 for paper in data:
     test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
