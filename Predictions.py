@@ -1,3 +1,4 @@
+from sympy import Predicate
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 
@@ -28,13 +29,25 @@ def predict_methodology(methodology_text):
     aggregated_logits = torch.mean(torch.stack(all_logits), dim=0)
     prediction = torch.argmax(aggregated_logits).item()
 
-    return 'Publishable' if prediction == 1 else 'Non-Publishable'
+    return prediction
 
 
 import json
 
-with open("test_data.json", 'r') as file:
+with open("training_data.json", 'r') as file:
     data = json.load(file)
 for paper in data:
     test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
-    print(predict_methodology(test))
+    prediction = predict_methodology(test)
+    if prediction == 0:
+        print('Non-Publishable')
+    elif prediction == 1:
+        print('Publishable with CVPR')
+    elif prediction == 2:
+        print('Publishable with EMNLP')
+    elif prediction == 3:
+        print('Publishable with KDD')
+    elif prediction == 4:
+        print('Publishable with NeurIPS')
+    elif prediction == 5:
+        print('Publishable with TMLR')

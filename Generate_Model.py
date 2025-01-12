@@ -33,7 +33,7 @@ def load_methodology_data(json_path):
     for paper in data:
         test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
         methodologies.append(test)
-        labels.append(1 if paper['label'] == 'Publishable' else 0)
+        labels.append(paper['label'])
     return methodologies, labels
 
 
@@ -60,21 +60,21 @@ def all():
 
     datasets = DatasetDict({'train': train_dataset, 'validation': val_dataset})
 
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=6)
     model.to(device)
 
     training_args = TrainingArguments(
         output_dir='./Model',
         eval_strategy='epoch',
         save_strategy='epoch',
-        learning_rate=5e-5,
+        learning_rate=3e-5,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=8,
-        num_train_epochs=3,
+        num_train_epochs=7,
         weight_decay=0.01,
         logging_dir='./logs',
         logging_steps=10,
-        load_best_model_at_end=True
+        load_best_model_at_end=True,
     )
 
     trainer = Trainer(
