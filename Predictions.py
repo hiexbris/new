@@ -4,8 +4,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 
 def predict_methodology(methodology_text):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = AutoModelForSequenceClassification.from_pretrained('./Model1').to(device)
-    tokenizer = AutoTokenizer.from_pretrained('./Model1')
+    model = AutoModelForSequenceClassification.from_pretrained('./Model').to(device)
+    tokenizer = AutoTokenizer.from_pretrained('./Model')
     
     tokenized = tokenizer(
         methodology_text,
@@ -41,12 +41,4 @@ for paper in data:
     if prediction == 0:
         print('Non-Publishable')
     elif prediction == 1:
-        print('Publishable with CVPR')
-    elif prediction == 2:
-        print('Publishable with EMNLP')
-    elif prediction == 3:
-        print('Publishable with KDD')
-    elif prediction == 4:
-        print('Publishable with NeurIPS')
-    elif prediction == 5:
-        print('Publishable with TMLR')
+        print('Publishable')

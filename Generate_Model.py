@@ -60,11 +60,11 @@ def all():
 
     datasets = DatasetDict({'train': train_dataset, 'validation': val_dataset})
 
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=6)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
     model.to(device)
 
     training_args = TrainingArguments(
-        output_dir='./Model1',
+        output_dir='./Model',
         eval_strategy='epoch',
         save_strategy='epoch',
         learning_rate=5e-5,
@@ -87,8 +87,8 @@ def all():
 
     trainer.train()
 
-    model.save_pretrained('./Model1')
-    tokenizer.save_pretrained('./Model1')
+    model.save_pretrained('./Model')
+    tokenizer.save_pretrained('./Model')
 
 if __name__ == '__main__':
     all()
