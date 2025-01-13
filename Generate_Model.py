@@ -31,8 +31,7 @@ def load_methodology_data(json_path):
         data = json.load(file)
     methodologies, labels = [], []
     for paper in data:
-        test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
-        methodologies.append(test)
+        methodologies.append(paper['text'])
         labels.append(paper['label'])
     return methodologies, labels
 
@@ -67,10 +66,10 @@ def all():
         output_dir='./Model',
         eval_strategy='epoch',
         save_strategy='epoch',
-        learning_rate=3e-5,
+        learning_rate=5e-5,
         per_device_train_batch_size=8,
         per_device_eval_batch_size=8,
-        num_train_epochs=7,
+        num_train_epochs=3,
         weight_decay=0.01,
         logging_dir='./logs',
         logging_steps=10,

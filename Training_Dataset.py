@@ -1,17 +1,27 @@
-from zero_shot import Zero_shot
+import json
+from PyPDF2 import PdfReader
+import sys
+sys.stdout.reconfigure(encoding='utf-8') 
 
-classifier = Zero_shot()
+def extract_text_from_pdf(pdf_path):
+            reader = PdfReader(pdf_path)
+            text = ""
+            for page in reader.pages:
+                text += page.extract_text()
+            return text
 
 training_data = []
 
 for i in range(30):
     if i < 5:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
+        paper = {}
+        paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
         paper['label'] = 0
         print(f"{i+1}.Done")
         training_data.append(paper)
     elif i < 9:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
+        paper = {}
+        paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
         if i == 5 or i == 6:
             paper['label'] = 1
         elif i == 7 or i == 8:
@@ -19,7 +29,8 @@ for i in range(30):
         training_data.append(paper)
         print(f"{i+1}.Done")
     else:
-        paper = classifier.sections(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R0{i+1}.pdf")
+        paper = {}
+        paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R0{i+1}.pdf")
         if i == 9 or i == 10 or i == 21 or i == 22 or i == 23:
             paper['label'] = 3
         elif i == 11 or i == 12 or i == 24 or i == 25 or i == 26:

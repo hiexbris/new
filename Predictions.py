@@ -37,8 +37,7 @@ import json
 with open("training_data.json", 'r') as file:
     data = json.load(file)
 for paper in data:
-    test = f"{paper['Abstract']} + {paper['Methodology']} + {paper['Results and Findings']} + {paper['Conclusion']}"
-    prediction = predict_methodology(test)
+    prediction = predict_methodology(paper['text'])
     if prediction == 0:
         print('Non-Publishable')
     elif prediction == 1:
