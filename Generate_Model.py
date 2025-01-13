@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset, DatasetDict
 
+torch.cuda.empty_cache()
 
 def tokenize_with_sliding_window(tokenizer, texts, labels=None, max_length=512, stride=128):
     """
@@ -63,7 +64,7 @@ def all():
     model.to(device)
 
     training_args = TrainingArguments(
-        output_dir='./Model',
+        output_dir='./Model1',
         eval_strategy='epoch',
         save_strategy='epoch',
         learning_rate=5e-5,
@@ -86,8 +87,8 @@ def all():
 
     trainer.train()
 
-    model.save_pretrained('./Model')
-    tokenizer.save_pretrained('./Model')
+    model.save_pretrained('./Model1')
+    tokenizer.save_pretrained('./Model1')
 
 if __name__ == '__main__':
     all()

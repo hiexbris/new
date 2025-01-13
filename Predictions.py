@@ -4,8 +4,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 
 def predict_methodology(methodology_text):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = AutoModelForSequenceClassification.from_pretrained('./Model').to(device)
-    tokenizer = AutoTokenizer.from_pretrained('./Model')
+    model = AutoModelForSequenceClassification.from_pretrained('./Model1').to(device)
+    tokenizer = AutoTokenizer.from_pretrained('./Model1')
     
     tokenized = tokenizer(
         methodology_text,
