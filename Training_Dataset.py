@@ -12,25 +12,38 @@ def extract_text_from_pdf(pdf_path):
 
 training_data = []
 
-for i in range(15):
+for i in range(30):
     if i < 5:
         paper = {}
         paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
         paper['label'] = 0
-        print(f"{i+1}.Done")
         training_data.append(paper)
+        print(f"{i+1}.Done")
     elif i < 9:
         paper = {}
         paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R00{i+1}.pdf")
-        paper['label'] = 1
+        if i in [5, 6]:
+            paper['label'] = 1
+        elif i in [7, 8]:
+            paper['label'] = 2
         training_data.append(paper)
         print(f"{i+1}.Done")
     else:
         paper = {}
         paper['text'] = extract_text_from_pdf(f"D:\\KDAG Hackathon\\KDAG-Hackathon\\Train\\R0{i+1}.pdf")
-        paper['label'] = 1
+        if i in [9, 10, 21, 22, 23]:
+            paper['label'] = 3
+        elif i in [11, 12, 24, 25, 26]:
+            paper['label'] = 4
+        elif i in [13, 14, 27, 28, 29]:
+            paper['label'] = 5
+        elif i in [15, 16, 17]:
+            paper['label'] = 1
+        elif i in [18, 19, 20]:
+            paper['label'] = 2
         training_data.append(paper)
         print(f"{i+1}.Done")
+
 
 
 import json

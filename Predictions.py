@@ -34,11 +34,28 @@ def predict_methodology(methodology_text):
 
 import json
 
-with open("training_data.json", 'r') as file:
+with open("test_data.json", 'r') as file:
     data = json.load(file)
+
+csv_data = [["Paper ID", "Publishable", "Conference"]]
+i = 0
+
 for paper in data:
+    i += 1
+    paper_id = f"P{i:03d}"
     prediction = predict_methodology(paper['text'])
     if prediction == 0:
-        print('Non-Publishable')
-    elif prediction == 1:
-        print('Publishable')
+        publishable = 0
+        conference = "na"
+    else:
+        publishable = 1
+        conferences = {1: "CVPR", 2: "EMNLP", 3: "KDD", 4: "NeurIPS", 5: "TMLR"}
+        conference = conferences[prediction]
+
+    csv_data.append([paper_id, publishable, conference])
+
+import csv
+filename = "results.csv"
+with open(filename, mode="w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(csv_data)

@@ -3,8 +3,24 @@ import torch
 from sklearn.model_selection import train_test_split
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
 from datasets import Dataset, DatasetDict
+from sklearn.metrics import accuracy_score, f1_score
 
-torch.cuda.empty_cache()
+
+def evaluate_model(trainer, validation_dataset):
+    """
+    Evaluate the model and print accuracy and F1 score.
+    """
+    predictions = trainer.predict(validation_dataset)
+    logits = predictions.predictions
+    labels = predictions.label_ids
+    preds = torch.argmax(torch.tensor(logits), dim=-1).numpy()
+
+    acc = accuracy_score(labels, preds)
+    f1 = f1_score(labels, preds, average='weighted')
+
+    print(f"Accuracy: {acc:.4f}")
+    print(f"F1 Score: {f1:.4f}")
+
 
 def tokenize_with_sliding_window(tokenizer, texts, labels=None, max_length=512, stride=128):
     """
@@ -60,7 +76,7 @@ def all():
 
     datasets = DatasetDict({'train': train_dataset, 'validation': val_dataset})
 
-    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
+    model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=6)
     model.to(device)
 
     training_args = TrainingArguments(
@@ -90,6 +106,9 @@ def all():
     model.save_pretrained('./Model')
     tokenizer.save_pretrained('./Model')
 
+    evaluate_model(trainer, datasets['validation'])
+
 if __name__ == '__main__':
+    torch.cuda.empty_cache()
     all()
     
