@@ -5,6 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 from datasets import Dataset, DatasetDict
 from sklearn.metrics import accuracy_score, f1_score
 
+torch.cuda.empty_cache()
 
 def evaluate_model(trainer, validation_dataset):
     """
@@ -109,6 +110,5 @@ def all():
     evaluate_model(trainer, datasets['validation'])
 
 if __name__ == '__main__':
-    torch.cuda.empty_cache()
     all()
     

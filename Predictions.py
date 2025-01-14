@@ -53,6 +53,7 @@ for paper in data:
         conference = conferences[prediction]
 
     csv_data.append([paper_id, publishable, conference])
+    print(i)
 
 import csv
 filename = "results.csv"
